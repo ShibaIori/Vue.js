@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Question3</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="search">
+    <input type="text" v-model="word" :style="border">
+
+    <div v-for="(user, index) in users" :key="user.id">
+      <p v-show="hitWord(index)">{{user.name}}</p>
+    </div>
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el: '#search',
+      data: {
+        word: '',
+
+        users: [
+          {
+            id: 1,
+            name: '佐藤'
+          },
+          {
+            id: 2,
+            name: '山田'
+          },
+          {
+            id: 3,
+            name: '鈴木'
+          },
+          {
+            id: 4,
+            name: '田中'
+          },
+        ],
+
+        border: {
+          outline: 'none',
+          border: '3px solid lightgreen',
+          borderRadius: '5px',
+        }
+      },
+      computed: {
+        hitWord: function () {
+          return function(index) {
+            return (this.users[index].name.indexOf(this.word) !== -1);
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

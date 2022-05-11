@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Question1</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+  <div id="tab">
+    <ul :style="{display: 'flex'}">
+      <li @click="setActive('1')" :style="activeStyle('1')">タブ1</li>
+      <li @click="setActive('2')" :style="activeStyle('2')">タブ2</li>
+      <li @click="setActive('3')" :style="activeStyle('3')">タブ3</li>
+    </ul>
+    <p v-if="isActive === '1'">コンテンツ1</p>
+    <p v-else-if="isActive === '2'">コンテンツ2</p>
+    <p v-else-if="isActive === '3'">コンテンツ3</p>
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el: '#tab',
+      data: {
+        isActive: "1",
+      },
+      computed: {
+        activeStyle: function() {
+          return function(num) {
+            return {
+              width: '100px',
+              listStyle: 'none',
+              cursor: 'pointer',
+              padding: '10px',
+              textAlign: 'center',
+              border: '1px solid grey',
+              backgroundColor: (this.isActive === num) ? 'black' : 'white',
+              color: (this.isActive === num) ? 'white' : 'black'
+            }
+          }
+        }
+      },
+      methods: {
+        setActive: function(num) {
+          this.isActive = num;
+        }
+      }
+    })
+  </script>
+</body>
+</html>
